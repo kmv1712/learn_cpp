@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int a, s, d, e;
+    cin >> a;
+    s = a % 10; // Сотые 
+    d = (a % 100) / 10; // Десятичные
+    e = a / 100; // Единицы 
+    cout <<  s + d + e;
+    return 0;
+}
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int a, s, d, e;
+    cin >> a; 
+    cout << (a / 2 * 2 ) + 2;
+    return 0;
+}
+
+
