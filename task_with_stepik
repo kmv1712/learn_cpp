@@ -41,4 +41,23 @@ int main() {
     return 0;
 }
 
-(t % 60) / 10
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+  int x, y;
+  double d, p, k, a;
+  cin >> p >> x >> y;
+  k = (x * 100 + y);
+  d = k * (p / 100);
+  
+  cout << (int) ((k + d) / 100)
+  << " "
+  <<(k + d) -
+   ((int) (k + d));
+// потеря точности подумать
+  return 0;
+}
