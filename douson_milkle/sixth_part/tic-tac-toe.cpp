@@ -24,13 +24,13 @@ int humanMove(const vector<char>& board, char human);
 int computerMove(vector<char> board, char computer);
 void announceWinner(char winner, char computer, char human);
 // функция main
-int main
+int main()
 {
     int move;
     const int NUM_SQUARES = 9;
     vector<char> board(NUM_SQUARES, EMPTY);
     instructions();
-    char human = humanPiece()
+    char human = humanPiece();
     char computer = opponent(human);
     char turn = X;
     displayBoard(board);
@@ -38,9 +38,15 @@ int main
     {
         if (turn == human)
         {
-            move = humanMove(board, computer);
+            move = humanMove(board, human);
+            board[move] = human;
+        }
+	else
+	{
+            move = computerMove(board, computer);
             board[move] = computer;
         }
+	
         displayBoard(board);
         turn = opponent(turn);
     }
@@ -50,9 +56,9 @@ int main
 
 void instructions()
 {
-    cout << "Добро пожаловать в игру крестики нолики";
-    cout << "Сделайте свой ход от 0 до 8";
-    cout << "Даные числа соответсвуют следующей позиции на доске";
+    cout << "Добро пожаловать в игру крестики нолики\n";
+    cout << "Сделайте свой ход от 0 до 8\n";
+    cout << "Даные числа соответсвуют следующей позиции на доске\n";
     cout << " 0 | 1 | 2\n";
     cout << "----------\n";
     cout << " 3 | 4 | 5\n";
@@ -76,15 +82,15 @@ int askNumber(string question, int high, int low)
     int number;
     do
     {
-        cout << question << "(" << low << ' - ' << high << "): ";
+        cout << question << "(" << low << " - " << high << "): ";
         cin >> number;
-    } while((number > low) || (number < high))
+    } while((number > high) || (number < low));
     return number;
 }
 
 char humanPiece()
 {
-    char go_first = askYesNo("Вы хотите пойти первым?");
+    char go_first = askYesNo("Вы хотите пойти первым?\n");
     if (go_first == 'y')
     {
         cout << "\nВы ходите первым\n";
@@ -92,8 +98,8 @@ char humanPiece()
     }
     else
     {
-        cout << "\nВы ходите вторым"\n;
-        return 0;
+        cout << "\nВы ходите вторым\n";
+        return O;
     }
 }
 
@@ -149,4 +155,93 @@ const int WINNING_ROWS[8][3] = { {0, 1, 2},
         return NO_ONE;
     }
 
+inline bool isLegal(int move, const vector<char>& board)
+{
+	return (board[move] == EMPTY);
+}
+
+int humanMove(const vector<char>& board, char human)
+{
+	int move = askNumber("\nКуда вы ходите? ", (board.size() - 1));
+	while (!isLegal(move, board))
+	{
+		cout << "\nПоле уже занято\n";
+		move = askNumber("\nКуда вы ходите? ", (board.size() - 1));
+	}
+	cout << "\nХорошо..\n";
+	return move;
+}
+
+int computerMove(vector<char> board, char computer)
+{
+	unsigned int move = 0;
+	bool found = false;
+	// если компьютер может выйграть следующим ходом, то он делает этот ход
+	while (!found && move < board.size())
+	{
+		if (isLegal(move, board))
+		{
+			board[move] = computer;
+			found = winner(board) == computer;
+			board[move] = EMPTY;
+		}
+		if(!found)
+		{
+			++move;
+		}
+	}
+	if (!found)
+	{
+		move = 0;
+		char human = opponent(computer);
+		while (!found && move < board.size())
+		{
+			if (isLegal(move, board))
+			{
+				board[move] = human;
+				found = winner(board) == human;
+			        board[move] = EMPTY;
+			}
+			if (!found)
+			{
+				++move;
+			}
+		}
+	}
+	if (!found)
+	{
+		move = 0;
+		unsigned int i = 0;
+		const int BEST_MOVES[] = {4, 0, 2, 6, 8, 1, 3, 5, 7};
+		// выбрать оптимальную свободную клутку
+		while (!found && i < board.size())
+		{
+			move = BEST_MOVES[i];
+			if (isLegal(move, board))
+			{
+				found = true;
+			}
+			++i;
+		}
+	}
+	cout << "\nКомпьютер занял поле номер\n" << move << endl;
+	return move;
+}	
+
+void announceWinner(char winner, char computer, char human)
+{
+	if(winner == computer)
+	{
+		cout << winner << "\nПобедил копьютер\n";
+	}
+	else if (winner == human)
+	{
+		cout << winner << "\nПобедил человек\n";
+	}
+	else 
+	{
+		cout << "\nНичья\n";
+	}
+}
+			
 
