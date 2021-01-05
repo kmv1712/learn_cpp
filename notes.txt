@@ -1,0 +1,71 @@
+Программы в go to стиле теряют в читаемости
+
+Главная задача изучение алгоритмов
+
+Генерация арифмитической и геометрической последовательности
+
+for x in range(start, stop, step):
+    print(x)
+
+x = start
+while x < stop:
+	print(x)
+	x += step
+
+for (x = start; x < stop; x += step){
+	cout << x << '\n';
+}
+
+x = start;
+while (x < stop){
+	cout << x << endl;
+	x += step;
+}
+
+в C++ '\n' - символ
+
+Алгоритмически  for не нужен синтаксический сахар
+
+
+for (x = 0, y = 100; x < y; x++, y--){
+	cout << x << y << 'n';
+}
+
+break
+
+cin >> N;
+for( int i = 0; i < N; i++){
+	cin >> x;
+	if (x!=13 || x!=666)
+		continue;
+	cout << x*x << '\n';
+} 
+
+----
+Однопроходные алгоритмы
+	За один проход
+	
+	Подсчет n+= 1
+	Суммирование s+=x
+	Умножение p*=x
+	Поиск макс, мин 
+		if (x > m){
+			m = x;
+		} 
+		
+		n = s = 0;
+		p = 1;
+		m =  
+		cin >> N;
+		for (int i = 0; i < N; ++i){
+			cin >> x;
+			n += 1; s += x; px = x;
+			if (x > m){
+				m = x;
+			}
+		}
+	и.т.д.
+	
+	
+
+
