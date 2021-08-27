@@ -1,0 +1,2 @@
+-E Остановит после выпонения препроцесора и запишит в HelloWorldPreprocesser.c 
+gcc -E HelloWorld.c > HelloWordPreprocesser.c 
