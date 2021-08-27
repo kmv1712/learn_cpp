@@ -1,2 +1,5 @@
 -E Остановит после выпонения препроцесора и запишит в HelloWorldPreprocesser.c 
-gcc -E HelloWorld.c > HelloWordPreprocesser.c 
+  gcc -E HelloWorld.c > HelloWordPreprocesser.c 
+
+Прописать путь в глобальных парамметрах до компилятора
+set PATH=C:\Program Files\CodeBlocks\MinGW\bin
