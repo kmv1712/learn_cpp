@@ -5,18 +5,19 @@ int main()
 {
     int n;
     scanf( "%d", &n );
-    int A[n], count_el = 0;
+    int A[n];
 
     for ( int i = 0; i < n; ++i )
         scanf( "%d", &A[i] );
 
-    for ( int i = 0; i < n; ++i )
+    int count = 0;
+    for ( int i = 1; i < n - 1; ++i )
     {
-        if i == 0
-        {
-
-        }
+        if ( A[i] > A[i-1] && A[i] > A[i+1] )
+            ++count;
     }
+
+    printf("%d\n", count);
 
     return 0;
 }
