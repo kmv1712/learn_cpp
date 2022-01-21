@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1642739442 source:c:\test\learn_cpp\tasks\for_debug\main.c
+	<stdio.h>
+	<stdlib.h>
+
